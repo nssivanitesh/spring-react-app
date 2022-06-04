@@ -109,38 +109,43 @@ public class TrafikLabService {
     public ArrayList<JourDataResponse> processGetJourData() {
         log.info("New request: Getting jour data");
         HashMap<String, Integer> top10 = new HashMap<String, Integer>();
-        List<JourData> jourDataList = null;
+        List<JourData> jourDataList = new ArrayList<JourData>();
         try {
             jourDataList = getJourDataList(true, 0, 0);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
 
-        for (JourData jourData : jourDataList) {
-            String key = "LN:" + jourData.getLineNumber() + ":DC:" +  + jourData.getDirectionCode();
-            if(top10.containsKey(key)) {
-                top10.put(key, top10.get(key) + 1);
-            } else {
-                top10.put(key, 1);
+            if (jourDataList != null) {
+                for (JourData jourData : jourDataList) {
+                    String key = "LN:" + jourData.getLineNumber() + ":DC:" +  + jourData.getDirectionCode();
+                    if(top10.containsKey(key)) {
+                        top10.put(key, top10.get(key) + 1);
+                    } else {
+                        top10.put(key, 1);
+                    }
+                }
+                log.info("Top 10: {}", top10);
+
+                ArrayList<JourDataResponse> jourDataResponseList = new ArrayList<>();
+                sortByDesc(top10).subList(0, 10).forEach(result -> {
+                    JourDataResponse response = new JourDataResponse();
+                    String key = result.getKey();
+
+                    String[] arrOfStr = key.split(":", 4);
+
+                    response.setLineNumber(Integer.parseInt(arrOfStr[1]));
+                    response.setDirectionCode(Integer.parseInt(arrOfStr[3]));
+                    response.setCount(result.getValue());
+
+                    jourDataResponseList.add(response);
+                });
+                log.info("Jour data response list: {}", jourDataResponseList);
+                return jourDataResponseList;
             }
         }
-        log.info("Top 10: {}", top10);
-
-        ArrayList<JourDataResponse> jourDataResponseList = new ArrayList<>();
-        sortByDesc(top10).subList(0, 10).forEach(result -> {
-            JourDataResponse response = new JourDataResponse();
-            String key = result.getKey();
-
-            String[] arrOfStr = key.split(":", 4);
-
-            response.setLineNumber(Integer.parseInt(arrOfStr[1]));
-            response.setDirectionCode(Integer.parseInt(arrOfStr[3]));
-            response.setCount(result.getValue());
-
-            jourDataResponseList.add(response);
-        });
-        log.info("Jour data response list: {}", jourDataResponseList);
-        return jourDataResponseList;
+        catch (JsonProcessingException e) {
+            log.error("Error getting jour data", e);
+            return null;
+        }
+        return null;
     }
 
     @NotNull
