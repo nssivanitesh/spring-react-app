@@ -8,8 +8,5 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 class DemoApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
 }
