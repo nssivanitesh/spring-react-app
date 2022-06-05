@@ -16,6 +16,6 @@ public interface APIProxy {
 
     @RequestMapping(method= RequestMethod.GET)
     @Headers("Accept: application/json")
-    public String getJourData(@RequestParam(value="model") String model,
+    String getTrafikLabData(@RequestParam(value="model") String model,
                                            @RequestParam(value="key") String key);
 }

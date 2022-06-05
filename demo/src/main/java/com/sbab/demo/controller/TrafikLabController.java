@@ -23,15 +23,21 @@ public class TrafikLabController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/getJourData")
-    public List<JourDataResponse> getJourData() throws JsonProcessingException {
+    public List<JourDataResponse> getJourData() {
         return trafikLabService.processGetJourData();
     }
 
 
     @CrossOrigin(origins = "*")
     @GetMapping("/getStopsForLine")
-    public List<StopData>  getStopsForLine(@RequestParam(value = "lineNumber", required = true) int lineNumberIn, @RequestParam(value = "directionCode", required = true) int directionCodeIn) throws JsonProcessingException {
+    public List<StopData>  getStopsForLine(@RequestParam(value = "lineNumber") int lineNumberIn, @RequestParam(value = "directionCode") int directionCodeIn) throws JsonProcessingException {
         return trafikLabService.processGetStopData(lineNumberIn, directionCodeIn);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value={"", "/", "hello"})
+    public String  getHello()  {
+        return "Hello!";
     }
 
 }

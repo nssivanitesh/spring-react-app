@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -39,10 +38,10 @@ public class TrafikLabService {
         return list;
     }
 
-    public @Cacheable(cacheNames = "modelData", key = "#model")
+
     JsonNode getRemoteAPIData(String model) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode node = objectMapper.readTree(apiProxy.getJourData(model, apiKey));
+        JsonNode node = objectMapper.readTree(apiProxy.getTrafikLabData(model, apiKey));
 
         log.info("Searching for {}", model);
         if (node != null) {
@@ -63,7 +62,7 @@ public class TrafikLabService {
             results.spliterator().forEachRemaining(result -> {
                 int lineNo = result.get("LineNumber").asInt();
                 int directionCode = result.get("DirectionCode").asInt();
-                if (getAll == true || lineNumberIn == lineNo && directionCodeIn == directionCode) {
+                if (getAll || (lineNumberIn == lineNo && directionCodeIn == directionCode)) {
                     JourData jourData = new JourData();
                     jourData.setLineNumber(lineNo);
                     jourData.setDirectionCode(directionCode);
@@ -125,18 +124,21 @@ public class TrafikLabService {
                 log.info("Top 10: {}", top10);
 
                 ArrayList<JourDataResponse> jourDataResponseList = new ArrayList<>();
-                sortByDesc(top10).subList(0, 10).forEach(result -> {
-                    JourDataResponse response = new JourDataResponse();
-                    String key = result.getKey();
+                if(top10.size() > 0) {
+                    sortByDesc(top10).subList(0, 10).forEach(result -> {
+                        JourDataResponse response = new JourDataResponse();
+                        String key = result.getKey();
 
-                    String[] arrOfStr = key.split(":", 4);
+                        String[] arrOfStr = key.split(":", 4);
 
-                    response.setLineNumber(Integer.parseInt(arrOfStr[1]));
-                    response.setDirectionCode(Integer.parseInt(arrOfStr[3]));
-                    response.setCount(result.getValue());
+                        response.setLineNumber(Integer.parseInt(arrOfStr[1]));
+                        response.setDirectionCode(Integer.parseInt(arrOfStr[3]));
+                        response.setCount(result.getValue());
 
-                    jourDataResponseList.add(response);
-                });
+                        jourDataResponseList.add(response);
+                    });
+                }
+
                 log.info("Jour data response list: {}", jourDataResponseList);
                 return jourDataResponseList;
             }
