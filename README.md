@@ -1,15 +1,15 @@
 # Spring React App - Using TrafikLab API
 
-Loading scren:
+Loading screen:
 <img width="1317" alt="Screenshot 2022-06-06 at 15 04 50" src="https://user-images.githubusercontent.com/14366701/172166608-92851832-8470-4fbf-befd-4c6b5f921696.png">
 
 Default home screen with info:
 <img width="1325" alt="Screenshot 2022-06-06 at 15 03 25" src="https://user-images.githubusercontent.com/14366701/172166555-c856b4ef-d416-482e-af95-f17b02240ca3.png">
 
-If data available:
+If data is available:
 <img width="1317" alt="Screenshot 2022-06-06 at 15 04 20" src="https://user-images.githubusercontent.com/14366701/172166590-34c42d08-550a-4764-aa55-49c7e4faa0d9.png">
 
-If data unavailable:
+If data is unavailable:
 <img width="1298" alt="Screenshot 2022-06-06 at 15 03 57" src="https://user-images.githubusercontent.com/14366701/172166572-1f91b7ce-91c9-4405-9c99-eea9a21e95a6.png">
 
 
