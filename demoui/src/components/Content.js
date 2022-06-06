@@ -59,9 +59,15 @@ export default class Content extends React.Component {
                     <div className="h-full w-full rounded-lg bg-blue-50 p-4">
                         {
                             (() => {
-                                if (this.props.data && this.props.data.length > 0) {
+                                if (this.props.userSelected === false) {
+                                    return (<><div className="bg-orange-200 p-4 rounded-md w-full">
+                                        <p>Please select a line!</p>
+                                    </div></>)
+                                }
+                                else if (this.props.data && this.props.data.length > 0) {
                                     return (<><div id="chartdiv" className="h-full w-full" key="chartDiv"></div></>)
                                 }
+
                                 else {
                                     return (<><div className="bg-red-200 p-4 rounded-md w-full">
                                         <p>Data unavailable for this line.</p>

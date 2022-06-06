@@ -7,11 +7,9 @@ export default class HomeCard extends React.Component {
         super(props);
         this.state = {
             error: null,
-            selected: 0,
+            selected: false,
             items: [],
             content: [],
-            mismatch: false,
-            timeout: false,
         };
     }
 
@@ -44,6 +42,7 @@ export default class HomeCard extends React.Component {
     }
 
     handleButtonClick = (data) => {
+
         if (data) {
             let url = this.getURL() + "/getStopsForLine?lineNumber=" + data.lineNumber + "&directionCode=" + data.directionCode;
             fetch(url)
@@ -51,12 +50,14 @@ export default class HomeCard extends React.Component {
                 .then(
                     (result) => {
                         this.setState({
+                            selected: true,
                             isLoaded: true,
                             content: result,
                         });
                     },
                     (error) => {
                         this.setState({
+                            selected: true,
                             isLoaded: true,
                             error
                         });
@@ -71,7 +72,7 @@ export default class HomeCard extends React.Component {
     }
 
     render() {
-        const { items, content } = this.state;
+        const { items, content, selected } = this.state;
 
         return (
             <div className="container relative mx-auto rounded-lg bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5">
@@ -86,7 +87,7 @@ export default class HomeCard extends React.Component {
                                             <Line lineContent={item} action={this.handleButtonClick} id={index} key={index} />
                                         ))}
                                     </div>
-                                    <Content data={content} />
+                                    <Content data={content} userSelected={selected}/>
                                     </>)
                                 }
                                 else {
