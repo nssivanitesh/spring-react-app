@@ -1,5 +1,11 @@
 # Spring React App - Using TrafikLab API
 
+<img width="1325" alt="Screenshot 2022-06-06 at 15 03 25" src="https://user-images.githubusercontent.com/14366701/172166555-c856b4ef-d416-482e-af95-f17b02240ca3.png">
+<img width="1298" alt="Screenshot 2022-06-06 at 15 03 57" src="https://user-images.githubusercontent.com/14366701/172166572-1f91b7ce-91c9-4405-9c99-eea9a21e95a6.png">
+<img width="1317" alt="Screenshot 2022-06-06 at 15 04 20" src="https://user-images.githubusercontent.com/14366701/172166590-34c42d08-550a-4764-aa55-49c7e4faa0d9.png">
+<img width="1317" alt="Screenshot 2022-06-06 at 15 04 50" src="https://user-images.githubusercontent.com/14366701/172166608-92851832-8470-4fbf-befd-4c6b5f921696.png">
+
+
 ## Requirements
 
 ### Functional Requirements
@@ -48,5 +54,4 @@ Implement the front end logic with React JS, which communicates with a Spring bo
 
 ## Future improvements
 1. Swagger can be used to document the API
-2. Custom API Responses for failures & exceptions
-3. A map library can be used to display the locations of the busstops to make it even more visual
+2. A map library can be used to display the locations of the busstops to make it even more visual
