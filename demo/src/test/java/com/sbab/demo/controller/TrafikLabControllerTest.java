@@ -80,25 +80,25 @@ class TrafikLabControllerTest {
         this.mockMvc.perform(get("/getStopsForLine")).andDo(print()).andExpect(status().is4xxClientError());
     }
 
-    @Order(7)
+    @Order(8)
     @Test
     public void testGetCatchAll() throws Exception {
         this.mockMvc.perform(get("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
     }
 
-    @Order(8)
+    @Order(9)
     @Test
     public void testPutCatchAll() throws Exception {
         this.mockMvc.perform(put("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
     }
 
-    @Order(9)
+    @Order(10)
     @Test
     public void testPostCatchAll() throws Exception {
         this.mockMvc.perform(post("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
     }
 
-    @Order(10)
+    @Order(11)
     @Test
     public void testDeleteCatchAll() throws Exception {
         this.mockMvc.perform(delete("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
