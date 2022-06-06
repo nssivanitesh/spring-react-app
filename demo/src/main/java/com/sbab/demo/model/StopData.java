@@ -9,7 +9,4 @@ public class StopData {
 
     private String stopPointNumber;
     private String stopPointName;
-    //private String stopPointNorthIndicator;
-    //private String stopPointEastIndicator;
-
 }

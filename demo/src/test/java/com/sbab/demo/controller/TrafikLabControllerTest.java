@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -63,5 +63,44 @@ class TrafikLabControllerTest {
                         .queryParam("lineNumber", "14")
                         .queryParam("directionCode", "1"))
                 .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Order(6)
+    @Test
+    public void testGetStopsDataNegParam() throws Exception {
+        this.mockMvc.perform(get("/getStopsForLine")
+                        .queryParam("lineNumber", "-7")
+                        .queryParam("directionCode", "-4"))
+                .andDo(print()).andExpect(status().isOk());
+    }
+
+    @Order(7)
+    @Test
+    public void testGetStopsDataNoParam() throws Exception {
+        this.mockMvc.perform(get("/getStopsForLine")).andDo(print()).andExpect(status().is4xxClientError());
+    }
+
+    @Order(7)
+    @Test
+    public void testGetCatchAll() throws Exception {
+        this.mockMvc.perform(get("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
+    }
+
+    @Order(8)
+    @Test
+    public void testPutCatchAll() throws Exception {
+        this.mockMvc.perform(put("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
+    }
+
+    @Order(9)
+    @Test
+    public void testPostCatchAll() throws Exception {
+        this.mockMvc.perform(post("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
+    }
+
+    @Order(10)
+    @Test
+    public void testDeleteCatchAll() throws Exception {
+        this.mockMvc.perform(delete("/getRouteUnavailable")).andDo(print()).andExpect(status().is4xxClientError());
     }
 }

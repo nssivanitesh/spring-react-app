@@ -3,12 +3,10 @@ package com.sbab.demo.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sbab.demo.model.*;
 import com.sbab.demo.service.TrafikLabService;
+import com.sbab.demo.util.DemoAppRunTimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -41,6 +39,12 @@ public class TrafikLabController {
     @GetMapping(value = {"", "/", "hello"})
     public String getHello() {
         return "Hello!";
+    }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = {"/**"}, method = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
+    public Exception handleException() throws DemoAppRunTimeException {
+        throw new DemoAppRunTimeException("Requested route unavailable!");
     }
 
 }

@@ -1,20 +1,16 @@
 package com.sbab.demo.controller;
 
+import com.sbab.demo.util.DemoAppRunTimeException;
 import com.sbab.demo.util.ErrorMessage;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.ValidationException;
-
-@ControllerAdvice
+@RestControllerAdvice
 public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    @ExceptionHandler(ValidationException.class)
-    ErrorMessage handleValidationException(ValidationException e) {
+    @ExceptionHandler(DemoAppRunTimeException.class)
+    ErrorMessage handleDemoAppException(DemoAppRunTimeException e) {
         return new ErrorMessage("400", e.getMessage());
     }
 }
