@@ -13,6 +13,7 @@
 
 ### Technical Requirements
 * Use JavaScript for front-end
+* Java for back-end
 
 ## Implementation
 
