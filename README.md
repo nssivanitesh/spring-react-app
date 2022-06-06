@@ -45,3 +45,8 @@ Implement the front end logic with React JS, which communicates with a Spring bo
   1. Verify if you have NodeJS and NPM installed on your machine
   2. Create a new .env file inside the `demoui`folder abd provide the `REACT_APP_BACKEND_URL` as REACT_APP_BACKEND_URL=COPIED_URL.
   3. Run `npm install` and `npm start` to start the application
+
+## Future improvements
+1. Swagger can be used to document the API
+2. Custom API Responses for failures & exceptions
+3. A map library can be used to display the locations of the busstops to make it even more visual
