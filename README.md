@@ -39,9 +39,9 @@ Implement the front end logic with React JS, which communicates with a Spring bo
   3. `demo\src\main\resources\application.properties` file contains the settings for:
     1. Base API URL - `sbab.app.baseURL`
     2. API Key - `trafiklab.api.key`
-  4. The application will launch in the default port, let's call it `BACKEND_URL`
+  4. The application will launch in the default port, let's call it `REACT_APP_BACKEND_URL`
   
 3. Folder `demoui` contains the front end code
   1. Verify if you have NodeJS and NPM installed on your machine
-  2. Provide the `BACKEND_URL` in the environment variable (.env) file.
+  2. Create a new .env file inside the `demoui`folder abd provide the `REACT_APP_BACKEND_URL` as REACT_APP_BACKEND_URL=COPIED_URL.
   3. Run `npm install` and `npm start` to start the application
