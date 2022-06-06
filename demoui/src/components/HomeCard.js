@@ -7,7 +7,6 @@ export default class HomeCard extends React.Component {
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
             selected: 0,
             items: [],
             content: [],
@@ -16,8 +15,17 @@ export default class HomeCard extends React.Component {
         };
     }
 
+    getURL () {
+        let url = process.env.REACT_APP_BACKEND_URL;
+        if (url === undefined || url === '') {
+            url = "http://192.168.0.17:8080";
+        }
+        return url;
+    }
+
     getJourData() {
-        fetch("http://192.168.0.17:8080/getJourData")
+        
+        fetch(this.getURL() + "/getJourData")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -37,7 +45,7 @@ export default class HomeCard extends React.Component {
 
     handleButtonClick = (data) => {
         if (data) {
-            let url = "http://192.168.0.17:8080/getStopsForLine?lineNumber=" + data.lineNumber + "&directionCode=" + data.directionCode;
+            let url = this.getURL() + "/getStopsForLine?lineNumber=" + data.lineNumber + "&directionCode=" + data.directionCode;
             fetch(url)
                 .then(res => res.json())
                 .then(
@@ -45,7 +53,6 @@ export default class HomeCard extends React.Component {
                         this.setState({
                             isLoaded: true,
                             content: result,
-                            mismatch: result.length !== data.count
                         });
                     },
                     (error) => {
@@ -64,7 +71,7 @@ export default class HomeCard extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, items, content, mismatch } = this.state;
+        const { items, content } = this.state;
 
         return (
             <div className="container relative mx-auto rounded-lg bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5">
@@ -84,7 +91,7 @@ export default class HomeCard extends React.Component {
                                 }
                                 else {
                                     return (<><div className="bg-green-200 rounded-md mx-auto p-8 m-8">
-                                        <p>Fetching data...</p>
+                                        <p>Fetching data {this.getURL()}...</p>
                                     </div></>)
                                 }
                             })()
